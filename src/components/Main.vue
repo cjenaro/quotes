@@ -7,11 +7,12 @@
     <new-quote v-on:new-quote-event="pushQuote"></new-quote>
 
     <!-- All quotes -->
-    <ul class="all-quotes">
-      <li @click="removeQuote(quote.id)" v-for="quote in quotes">
+    <!-- <tra class="all-quotes"> -->
+    <transition-group name="fade" tag="ul" class="all-quotes">
+      <li @click="removeQuote(quote.id)" v-for="quote in quotes" v-bind:key="quote.id">
         <quote :text="quote.text"></quote>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -66,5 +67,15 @@ li {
 
 li:hover {
   background-color: orangered;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .2s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
